@@ -1,22 +1,38 @@
+import { useParams } from "react-router";
 import ChatHead from "./ChatHead";
 import Messages from "./Messages";
 import Options from "./Options";
-
+import { useGetMessagesQuery } from "../../redux/features/messages/messagesApi";
 
 const ChatBody = () => {
-    return (
-        <div className="w-full lg:col-span-2 lg:block">
-            <div className="w-full grid conversation-row-grid">
-                <ChatHead
-                    avatar="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-                    name="Akash Ahmed"
-                />
-                <Messages />
-                <Options />
-                {/* <Blank /> */}
-            </div>
-        </div>
+  const { id } = useParams();
+
+  const { data: messages, isError, isLoading, error } = useGetMessagesQuery(id);
+
+  let content = null;
+
+  if (isLoading) {
+    content = <p>Loading conversations...</p>;
+  } else if (!isLoading && isError) {
+    content = <p>{error?.data}</p>;
+  } else if (!isLoading && !isError && messages?.length === 0) {
+    content = <p>No conversation found! </p>;
+  } else if (!isLoading && !isError && messages.length > 0) {
+    content = (
+      <>
+        <ChatHead message={messages[0]} />
+        <Messages messages={messages} />
+        <Options />
+        {/* <Blank /> */}
+      </>
     );
+  }
+
+  return (
+    <div className="w-full lg:col-span-2 lg:block">
+      <div className="w-full grid conversation-row-grid">{content}</div>
+    </div>
+  );
 };
 
 export default ChatBody;

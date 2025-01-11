@@ -18,7 +18,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const [register, { isError, isLoading, error, data }] = useRegisterMutation();
+  const [register, { isLoading, error, data }] = useRegisterMutation();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -41,7 +41,11 @@ const Register = () => {
       setIsMatched(false);
     } else {
       setIsMatched(true);
-      register(registerData);
+      register({
+        name: registerData.fullName,
+        email: registerData.email,
+        password: registerData.password
+      });
       setRegisterData(initialData);
     }
   };
@@ -181,7 +185,7 @@ const Register = () => {
               Password not matched
             </p>
 
-            {isError && (
+            {responseError && (
               <p className={"block text-red-500 text-center"}>{responseError}</p>
             )}
           </form>

@@ -1,4 +1,4 @@
-import blankImage from './blank.svg'
+import blankImage from '/blank.svg'
 
 const Blank = () => {
     return (

@@ -1,7 +1,17 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router";
+import { userLoggedOut } from "../../redux/features/auth/authSlice";
 
 
 const Navigation = () => {
+
+    const dispatch = useDispatch();
+
+    const logout = () => {
+        dispatch(userLoggedOut());
+        localStorage.removeItem('auth');
+    }
+
     return (
         <nav className="border-general sticky top-0 z-40 border-b bg-violet-700 transition-colors">
             <div className="max-w-7xl mx-auto">
@@ -10,12 +20,12 @@ const Navigation = () => {
                         <img
                             className="h-10"
                             src={'logoImage'}
-                            alt="Learn with Sumit"
+                            alt="xeraChat"
                         />
                     </Link>
                     <ul>
                         <li className="text-white">
-                            <a href="#">Logout</a>
+                            <span onClick={logout} className="cursor-pointer">Logout</span>
                         </li>
                     </ul>
                 </div>
