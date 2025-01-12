@@ -1,15 +1,17 @@
 import { useDispatch } from "react-redux";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { userLoggedOut } from "../../redux/features/auth/authSlice";
 
 
 const Navigation = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const logout = () => {
         dispatch(userLoggedOut());
         localStorage.removeItem('auth');
+        navigate('/')
     }
 
     return (

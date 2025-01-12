@@ -6,7 +6,7 @@ import useAuth from "../../hooks/useAuth";
 
 const ChatHead = ({message}) => {
 
-    const {email} = useAuth();
+    const {email} = useAuth() || {};
 
     const {sender, receiver} = message || {};
 
