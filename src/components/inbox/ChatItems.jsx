@@ -24,12 +24,12 @@ const ChatItems = () => {
     content = <p>{error?.data}</p>;
   } else if (!isLoading && !isError && conversations?.length === 0) {
     content = <p>No conversation found! </p>;
-  } else if (!isLoading && !isError && conversations.length > 0) {
+  } else if (!isLoading && !isError && conversations?.length > 0) {
     content = conversations.map((conversation) => {
         
       const { id, message, timestamp } = conversation;
 
-      const partner = getPartnerInfo(conversation.users, user?.email);
+      const partner = getPartnerInfo(conversation?.users, user?.email);
 
       return (
         <li key={id}>
