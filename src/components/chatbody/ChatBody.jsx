@@ -17,7 +17,7 @@ const ChatBody = () => {
     content = <p>{error?.data}</p>;
   } else if (!isLoading && !isError && messages?.length === 0) {
     content = <p>No conversation found! </p>;
-  } else if (!isLoading && !isError && messages.length > 0) {
+  } else if (!isLoading && !isError && messages?.length > 0) {
     content = (
       <>
         <ChatHead message={messages[0]} />

@@ -27,7 +27,7 @@ const ChatItems = () => {
   } else if (!isLoading && !isError && conversations?.length > 0) {
     content = conversations.map((conversation) => {
         
-      const { id, message, timestamp } = conversation;
+      const { id, message, timestamp } = conversation || {};
 
       const partner = getPartnerInfo(conversation?.users, user?.email);
 
